@@ -41,12 +41,6 @@ contract ProductContract {
         ProductIdList.push(id);
         emit productCreation(id, name, colour);
     }
-    
-    // function values() public{
-    //     Product memory pr1= Product(msg.sender,"idgiven","abid","yellow",0);
-    //     pr=pr1;
-
-    // }
 
     function changeProductOwner(string memory id, address to) public {
         require(

@@ -15,7 +15,7 @@ async function myApp() {
     console.log(`my Name : ${await productContract.methods.myName().call()}`);
     // await productContract.methods.values().call();
 
-    await productContract.methods.addProduct('PROD1001', 'Car', 'Black').send({from:accountAddress});
+    await productContract.methods.addProduct('PROD1001', 'Car', 'Black').send({from: accountAddress,gas: "1000000"});
     console.log(`balance : ${await web3.eth.getBalance(accountAddress)}`);
 
     let product = await productContract.methods.getProductById('PROD1001').call();
