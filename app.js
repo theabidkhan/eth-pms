@@ -1,23 +1,28 @@
-const Web3 = require("web3");
-const ganache = require("ganache");
+var Web3 = require('web3');
+var web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+var productContractJson = require("./build/contracts/ProductContract.json");
 
-const web3 = new Web3(ganache.provider());
+let contractAddress = "0x372f885e7e2D5D304C641b84F1f82f026d55FBE2";
+let accountAddress = "0x4ED4aF7e31b308430998F1f63365f213913331DE";
 
-const contract = require('./build/contracts/ProductContract.json');
 
-async function myApp(){
+async function myApp() {
 
-    let token = new web3.eth.Contract(contract.abi, '0x78B7c234cfb2141C9ff44b3Cf674a1b4AA1eBCC3');
-    // console.info(token);
+    let productContract = new web3.eth.Contract(productContractJson.abi, contractAddress);
 
-    let result = await token.methods.addProduct('PROD1001', 'Pencil', 'Blue').call();
-    // console.info(result);
+    console.log(`balance : ${await web3.eth.getBalance(accountAddress)}`)
 
-    let product= await token.methods.getProductById('PROD1001').call();
-    // console.info(product);
+    console.log(`my Name : ${await productContract.methods.myName().call()}`);
+    // await productContract.methods.values().call();
+
+    await productContract.methods.addProduct('PROD1001', 'Car', 'Black').send({from:accountAddress});
+    console.log(`balance : ${await web3.eth.getBalance(accountAddress)}`);
+
+    let product = await productContract.methods.getProductById('PROD1001').call();
+    console.info(product);
+
+    let prodCount = await productContract.methods.getProductCounts().call();
+    console.log(`product count : ${prodCount}`);
 }
 
 myApp();
-
-// let tokenBalance = await token.methods.balanceOf('0x69fc54ad4879f7b446a0ab86db531dd4a006ec99').call();
-// ethSwap.methods.buyTokens().send({ value: ethAmount, from: account })

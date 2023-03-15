@@ -2,8 +2,8 @@
 // require("babel-polyfill");
 
 
-// var HDWalletProvider = require("truffle-hdwallet-provider");
-// const MNEMONIC = 'ugly wink double eyebrow wild cannon estate cancel syrup sense blade gym';
+var HDWalletProvider = require("truffle-hdwallet-provider");
+const MNEMONIC = 'apology pencil office dilemma bracket ride tag spirit balance ethics claim hour';
 
 module.exports = {
   networks: {
