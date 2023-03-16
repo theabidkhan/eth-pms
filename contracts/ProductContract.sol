@@ -2,44 +2,30 @@
 pragma solidity ^0.8.0;
 
 contract ProductContract {
-    string public myName = "MD ABID KHAN";
-
-    function getName() public view returns (string memory Name) {
-        return myName;
-    }
 
     struct Product {
         address Owner;
         string Id;
         string Name;
-        string Colour;
+        string Color;
         uint Status;
     }
-    Product public pr;
 
     string[] ProductIdList;
     mapping(string => Product) products;
 
-    event productCreation(
-        string indexed id,
-        string indexed name,
-        string indexed colour
-    );
+    event productCreation(string indexed id, string indexed name,string indexed color);
     event ownerChanged(string indexed id, address indexed newOwner);
 
-    function addProduct(
-        string memory id,
-        string memory name,
-        string memory colour
-    ) public {
+    function addProduct(string memory id,string memory name,string memory color) public {
         products[id].Id = id;
         products[id].Name = name;
-        products[id].Colour = colour;
+        products[id].Color = color;
         products[id].Owner = msg.sender;
         products[id].Status = 0;
 
         ProductIdList.push(id);
-        emit productCreation(id, name, colour);
+        emit productCreation(id, name, color);
     }
 
     function changeProductOwner(string memory id, address to) public {
@@ -51,29 +37,18 @@ contract ProductContract {
         emit ownerChanged(id, to);
     }
 
-    function getProductById(
-        string memory productId
-    )
-        public
-        view
-        returns (
-            address Owner,
-            string memory Id,
-            string memory Name,
-            string memory Colour,
-            uint Status
-        )
-    {
+    function getProductById(string memory productId)public view returns (Product memory product){
         Product memory p = products[productId];
-        return (p.Owner, p.Id, p.Name, p.Colour, p.Status);
+        return (p);
     }
 
-    function getProductById1(
-        string memory productId
-    ) public view returns (Product memory) {
-        Product memory p = products[productId];
-        return p;
-    }
+    function getAllProduct() public view returns (Product[] memory){
+        Product[] memory prods = new Product[](ProductIdList.length);
+        for (uint i = 0; i <ProductIdList.length ; i++) {
+            prods[i] = products[ProductIdList[i]];
+        }
+        return prods;
+    }   
 
     function getProductCounts() public view returns (uint) {
         return ProductIdList.length;
