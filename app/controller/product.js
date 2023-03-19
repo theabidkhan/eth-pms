@@ -104,14 +104,6 @@ module.exports.getAllProduct = async function (req, res) {
         console.info(`Product Details: ${JSON.stringify(productDetails)}`);
         console.log(`balance : ${await web3.eth.getBalance(accountAddress)}`);
 
-        // let productDetails = {
-        //     Owner : product.Owner,
-        //     Id : product.Id,
-        //     Name : product.Name,
-        //     color : product.color,
-        //     Status : product.Status
-        // }
-
         return res.status(constants.RES_CODE_OK).json({ code: constants.RES_CODE_OK, success: true, message: constants.DETAILS_FETCHED_SUCCESSFULLY_MESSAGE, data: productDetails });
     } catch (error) {
         console.error(`Failed to submit transaction: ${error}`);
