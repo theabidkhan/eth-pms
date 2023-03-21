@@ -1,18 +1,14 @@
 {
-  "name": "test",
+  "name": "eth-pms",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "1. ganache 2. truffle migrate 3. node app.js",
+  "main": "truffle-config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Md Abid Khan",
+  "author": "md abid khan",
   "license": "ISC",
   "dependencies": {
-    "ganache": "^7.7.7",
-    "pm2": "^5.2.2",
-    "truffle": "^5.8.0",
-    "truffle-hdwallet-provider": "^1.0.6",
-    "web3": "^1.8.2"
+    "truffle-hdwallet-provider": "^1.0.17"
   }
 }
